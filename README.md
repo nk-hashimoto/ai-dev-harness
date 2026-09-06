@@ -47,7 +47,7 @@ norms/          作業規範。プロジェクト非依存
 
 kit/            プロジェクトへコピーする一式
   agents/       implementer / reviewer
-  skills/       next-task(実装ループ)+ 定型手順13件
+  skills/       next-task(実装ループ)+ 定型手順14件
   settings/     CLAUDE.md.template / settings.json.template
   docs-dev/     TASKS / WORKFLOW / IMPLEMENTATION-RULES のテンプレート
 
@@ -93,7 +93,9 @@ docs/adoption/  permissions.md / merge-request-flow.md
 
 **実装ループの中核**: `bug-hunt` / `test-first-fix` / `impact-scan` / `contract-change` / `self-review` / `release-check` / `spec-check`
 
-**横断**: `handoff` / `feedback-capture` / `session-economy` / `doc-audit` / `decision-log` / `spec-change`
+**横断**: `handoff` / `feedback-capture` / `session-economy` / `doc-audit` / `decision-log` / `spec-change` / `issue-intake`
+
+`issue-intake` は**実装ループの外で見つけたものの入口**。ループの中で見つけたものは `next-task` がタスクの記述を開くので既存の申し送りが目に入るが、画面を触っていて気づいたもの・人がチャットで挙げたものは**誰も台帳を開かない**まま起票へ進む。起票も申し送りの一形態なので、判定そのものは `working-norms.md` の2関門が正で、このスキルが持つのは**その前に引くもの**だけ。
 
 `self-review` は**完了報告の前に必ず実行する**(呼ばれるのを待たない)。作った成果物の種類 — コード / 常設ドキュメント / 掃引・検査 / 報告 — ごとに**読み返すルールの下限が表で決まる**ので、開放的な再検証にはならない(判断で足すのは自由、減らすのは禁止)。**モデルの階層で省かない**: 一度読んだ状態と、この成果物に当てた状態は内側からは区別できず、規則を読んでいたのに自分の出力へ当てていないという失敗は階層を問わず起きる。
 
