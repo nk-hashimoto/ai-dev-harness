@@ -2,7 +2,7 @@
 
 コーディングエージェントに**実装タスクを1件ずつ完結させる**ための作業規範・サブエージェント定義・スキル一式。
 
-タスク台帳を入力に、「実装 → 検証 → レビュー → コミット → 着地」を1周として回す。**着地の仕方はプロジェクトの規約から読み取る** — 規約が無ければ MR/PR を作って止まり、マージは人が行う。
+タスク台帳を入力に、「実装 → 検証 → AIレビュー → MR/PR提出」を回し、必要な承認・本流への取り込みを確認してタスクを完了にする。**着地の仕方はプロジェクトの規約から読み取る** — 規約が無ければ MR/PR を作って止まり、マージは人が行う。
 
 ## スコープ
 
@@ -67,9 +67,19 @@ docs/adoption/  permissions.md / merge-request-flow.md
 3. **エージェント定義を置く**: `kit/agents/*` を `~/.claude/agents/` またはプロジェクトの `.claude/agents/` へコピーする
 4. **プロジェクト側を用意する**: `kit/settings/CLAUDE.md.template` と `kit/docs-dev/*.template` を、プロジェクトの `CLAUDE.md` / `docs/dev/` として埋める
 5. **承認設定を試す**: `kit/settings/settings.json.template` をプロジェクトの `.claude/settings.json` に当て、効くかを確かめる([手順](docs/adoption/permissions.md))
-6. **回す**: `/next-task`(1タスク)または `/loop /next-task`(連続)
+6. **台帳を準備する**: `TASKS.md.template` の状態・実行記録を使う。既存の台帳は同テンプレートの移行手順で確認し、旧 `[x]` を未確認のまま依存完了とみなさない
+7. **回す**: `/next-task`(1タスク)または `/loop /next-task`(連続)。レビュー待ちは取り直さず、中断したタスクは既存ブランチから再開する
 
 **新しく置いたエージェント定義は、セッションを再起動するまで認識されない**(`Agent type not found` になる)。
+
+## ドキュメントの読み方
+
+- 状態・依存・記録の書式: [タスク台帳テンプレート](kit/docs-dev/TASKS.md.template)
+- 実行・指摘単位の再レビュー・中断と再開: [next-task](kit/skills/next-task/SKILL.md)
+- プロジェクト固有の着地とレビュー証跡: [ワークフローテンプレート](kit/docs-dev/WORKFLOW.md.template)
+- 導入時のMR/PR運用: [MR/PRフロー](docs/adoption/merge-request-flow.md)
+
+`norms/` は判断・品質の共通規範、`kit/skills/` は実行手順、`kit/docs-dev/` は導入先で埋める状態・規約。コピーしたテンプレートの参照先や節名を変更したら、利用するスキルにも対応を伝える。
 
 ## 3役とモデルの割り当て
 
