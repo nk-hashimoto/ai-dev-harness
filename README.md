@@ -47,7 +47,7 @@ norms/          作業規範。プロジェクト非依存
 
 kit/            プロジェクトへコピーする一式
   agents/       implementer / reviewer
-  skills/       next-task(実装ループ)+ 定型手順13件
+  skills/       next-task(実装ループ)+ 定型手順14件
   settings/     CLAUDE.md.template / settings.json.template
   docs-dev/     TASKS / WORKFLOW / IMPLEMENTATION-RULES のテンプレート
 
@@ -93,11 +93,9 @@ docs/adoption/  permissions.md / merge-request-flow.md
 
 **実装ループの中核**: `bug-hunt` / `test-first-fix` / `impact-scan` / `contract-change` / `self-review` / `release-check` / `spec-check`
 
-**横断**: `handoff` / `feedback-capture` / `session-economy` / `doc-audit` / `decision-log` / `spec-change`
+**横断**: `handoff` / `feedback-capture` / `session-economy` / `doc-audit` / `decision-log` / `spec-change` / `issue-intake`
 
-`self-review` は**完了報告の前に必ず実行する**(呼ばれるのを待たない)。作った成果物の種類 — コード / 常設ドキュメント / 掃引・検査 / 報告 — ごとに**読み返すルールの下限が表で決まる**ので、開放的な再検証にはならない(判断で足すのは自由、減らすのは禁止)。**モデルの階層で省かない**: 一度読んだ状態と、この成果物に当てた状態は内側からは区別できず、規則を読んでいたのに自分の出力へ当てていないという失敗は階層を問わず起きる。
-
-`release-check` は**明示的に呼んだときだけ動く**。報告の基準の全項目をコマンド実行で機械的に検証するもので、**その大半はループの中で別々に済んでいる**(静的検査とテストは検証の手順、diff と最悪ケースは `self-review`)。ループの外で「本当に完了と言えるか」を一度に確かめたいときに使う。
+各スキルが何をするか・いつ使うかは `kit/skills/<名前>/SKILL.md` の `description` にある。
 
 ## ライセンス
 
