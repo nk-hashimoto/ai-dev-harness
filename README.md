@@ -107,12 +107,7 @@ docs/adoption/  permissions.md(Claude Code)/ merge-request-flow.md
 
 **台帳が指定するのは実装 tier(`standard` / `advanced`)で、モデル名ではない。** どの role をどのモデルで動かすかは `manifest.json` の `roles` に書いてあり、インストーラが各ツールの role 定義へ書き込む。**同梱の値は執筆時点のもの**なので、導入時に確かめて直す。
 
-| role | Claude Code | Codex | Kiro |
-|---|---|---|---|
-| orchestrator | Opus 5.5(起動時に選ぶ) | gpt-5.6-sol(起動時に選ぶ) | Claude Opus 5 |
-| implementer | Sonnet 5 | gpt-5.6-luna | Claude Sonnet 5 |
-| implementer-advanced | Opus 5.5 | gpt-5.6-luna | Claude Opus 5 |
-| reviewer | Opus 5.5 | gpt-5.6-sol | Claude Opus 5 |
+orchestrator のモデルはセッションを起動する側で選ぶ(推奨は各 `runtime.md` の「役割とモデル」。Kiro は `orchestrator` エージェントの定義で固定する)。
 
 **3役すべてに同じモデルを割り当ててよい。** 枠が限られるなら全て下位モデルで始め、品質のために必要になった箇所だけ上げる。上げる順の推奨は **reviewer → implementer-advanced → orchestrator**。
 

@@ -7,15 +7,15 @@
 
 ## 役割とモデル
 
-| role | 定義 | モデル |
-|---|---|---|
-| orchestrator | `.kiro/agents/orchestrator.md`(セッションをこのエージェントで始める) | Claude Opus 5 |
-| implementer(standard) | `.kiro/agents/implementer.md` | Claude Sonnet 5 |
-| implementer-advanced(advanced) | `.kiro/agents/implementer-advanced.md` | Claude Opus 5 |
-| reviewer | `.kiro/agents/reviewer.md` | Claude Opus 5 |
+| role | 定義 |
+|---|---|
+| orchestrator | `.kiro/agents/orchestrator.md`(セッションをこのエージェントで始める) |
+| implementer(standard) | `.kiro/agents/implementer.md` |
+| implementer-advanced(advanced) | `.kiro/agents/implementer-advanced.md` |
+| reviewer | `.kiro/agents/reviewer.md` |
 
-- **モデルは執筆時点のもの。** Kiro で選べるモデルは Claude Code と同じとは限らない(執筆時点では Opus 5.5 が無く、Opus 5 が最新)
-- **定義の `model:` に書く識別子は `/model` で確かめる。** 公式ドキュメントに一覧が無く、生成した定義には `claude-opus-5` / `claude-sonnet-5` を書いてある(未検証)
+- **role 定義のモデルは、配布元の `manifest.json` の `roles` が正**(インストーラが定義へ書き込む)。**値は執筆時点のもの。** Kiro で選べるモデルは Claude Code と同じとは限らない(執筆時点では Opus 5.5 が無く、Opus 5 が最新)
+- **定義の `model:` に書く識別子は `/model` で確かめる。** 公式ドキュメントに一覧が無く、同梱の識別子は未検証
 - **指定したモデルが使えないと、既定のモデルで動き続け、警告だけが出る。** 規範の「未知の値を近い既定へ黙って落とさない」に反するので、導入時と定義を変えたときに警告が出ていないかを見る
 - **orchestrator のモデルを固定するには、セッションを `orchestrator` エージェントで始める。** 既定のエージェントで始めると、モデルはチャットで選んだものになる
 - **effort(推論量)は role ごとに固定できない。** 定義に effort の欄が無く、セッション単位で選ぶ(IDE はモデル選択の Effort、CLI は `/model` か `--effort`)。サブエージェントが親の effort を引き継ぐかは公式ドキュメントに記載が無い
@@ -56,7 +56,7 @@ resources:
 
 - **起動**: orchestrator が、role 名を名指ししてサブエージェントとして起動する(例: 「`reviewer` サブエージェントで T の差分をレビューする」)。サブエージェントは会話履歴を引き継がず、自分のコンテキストで動くので、reviewer の独立性の条件を満たす
 - **承認を求められない起動では、承認の要る道具を使うと即座に失敗する。** 実装とレビューを任せる role は信頼済みにしておく(`trustedAgents`)か、`permissions` で必要な操作を許可する
-- **再開**: 終わったサブエージェントを続ける手段は公式ドキュメントに見当たらない。**差し戻し・再レビューは毎回新規に起動し、前ラウンドまでの指摘一覧(番号・内容・判定・未解消回数)を添える**(スキル `next-task` の再開できないときの手順)
+- **再開**: 終わったサブエージェントを続ける手段は、読んだ範囲の公式ドキュメント(sub-agents・custom agents)には見当たらなかった。**差し戻し・再レビューは毎回新規に起動し、前ラウンドまでの指摘一覧(番号・内容・判定・未解消回数)を添える**(スキル `next-task` の再開できないときの手順)
 - Kiro は「Run all Tasks」で独立したタスクを並列に実行するが、**このハーネスでは使わない**(下の「台帳」)
 
 ## 連続実行とタスク管理
@@ -70,7 +70,7 @@ resources:
 
 ### 対象の spec
 
-`WORKFLOW.md` §3 に、いま回している spec の名前を書く。書いていなければ、未完了のタスクが残る spec が1つならそれ、複数なら人に聞く。
+`WORKFLOW.md` §3「台帳の保存先」に、いま回している spec の名前を書く。書いていなければ、未完了のタスクが残る spec が1つならそれ、複数なら人に聞く。
 
 ### `TASKS.md.template` の節との対応(未検証)
 

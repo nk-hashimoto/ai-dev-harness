@@ -6,14 +6,15 @@
 
 ## 役割とモデル
 
-| role | 定義 | モデル | reasoning effort |
-|---|---|---|---|
-| orchestrator | メインセッション | `gpt-5.6-sol`(起動する側で選ぶ) | high |
-| implementer(standard) | `.codex/agents/implementer.toml` | `gpt-5.6-luna` | max |
-| implementer-advanced(advanced) | `.codex/agents/implementer-advanced.toml` | `gpt-5.6-luna` | max |
-| reviewer | `.codex/agents/reviewer.toml` | `gpt-5.6-sol` | high |
+| role | 定義 |
+|---|---|
+| orchestrator | メインセッション。推奨は `gpt-5.6-sol`・reasoning effort high(起動する側で選ぶ) |
+| implementer(standard) | `.codex/agents/implementer.toml` |
+| implementer-advanced(advanced) | `.codex/agents/implementer-advanced.toml` |
+| reviewer | `.codex/agents/reviewer.toml` |
 
-- **モデルと effort の値は執筆時点のもの。** 導入時に見直す。implementer と implementer-advanced が同じモデルなのは、この割り当てでは tier の違いを担当範囲(と差し戻し後の昇格)だけで表しているため。上位モデルで advanced を回したいなら、`implementer-advanced` の定義だけを変える
+- **role 定義のモデルと effort は、配布元の `manifest.json` の `roles` が正**(インストーラが定義へ書き込む)。**値は執筆時点のもの**なので導入時に見直す。
+  - 同梱の値で implementer と implementer-advanced が同じモデルなのは、この割り当てでは tier の違いを担当範囲(と差し戻し後の昇格)だけで表しているため。上位モデルで advanced を回したいなら、`manifest.json` の `implementer-advanced` だけを変えて入れ直す
 - **モデルは role 定義に完全な識別子で書く。** 実行時に別のモデルで上書きしない
 
 ## ファイルの置き場
