@@ -2,7 +2,7 @@
 
 ## 導入時に決めること
 
-プロジェクトの `WORKFLOW.md` §3に、MR/PRのマージ先となる本流ブランチとブランチ規則、MR/PRの作成・照会方法、必要な承認、台帳・AIレビュー記録の保存と共有方法を記入する。雛形は [WORKFLOW.md.template](../../kit/docs-dev/WORKFLOW.md.template)。
+プロジェクトの `WORKFLOW.md` §3に、MR/PRのマージ先となる本流ブランチとブランチ規則、MR/PRの作成・照会方法、必要な承認、台帳・AIレビュー記録の保存と共有方法を記入する。雛形は [WORKFLOW.md.template](../../shared/project/docs-dev/WORKFLOW.md.template)。
 
 規約が無いときの既定は、MR/PRを提出して人のレビューへ渡すこと。別の着地を採る場合はプロジェクトの規約を実行時に読む。**AI reviewerの合格はマージの承認ではない。**
 
@@ -10,8 +10,8 @@
 
 | 確認したいこと | 正の定義 |
 |---|---|
-| 状態・依存・旧台帳からの移行 | [TASKS.md.template](../../kit/docs-dev/TASKS.md.template) → 導入先の台帳 |
-| 状態照合、実装、差し戻し、中断・再開 | [next-task](../../kit/skills/next-task/SKILL.md) |
+| 状態・依存・旧台帳からの移行 | [TASKS.md.template](../../shared/project/docs-dev/TASKS.md.template) → 導入先の台帳 |
+| 状態照合、実装、差し戻し、中断・再開 | [next-task](../../shared/skills/next-task/SKILL.md) |
 | プロジェクト固有の提出・承認・台帳保存 | 導入先の `WORKFLOW.md` §3 |
 | 人のレビューに渡す検証・判断の記録 | 導入先の `WORKFLOW.md` §7 |
 
@@ -19,6 +19,6 @@ AIレビューラリー中は同じタスクを継続し、別タスクへ進ま
 
 ## リポジトリごとの規則の解決
 
-作業対象ディレクトリの `CLAUDE.md`、`WORKFLOW.md`、`IMPLEMENTATION-RULES.md` §1が示すプロジェクト固有の規約文書・決定記録、既存ブランチの慣習から特定する。文書の名称や形式はプロジェクトの実態に従い、ブランチ命名等が読み取れなければ聞く。サブシステム固有の値をグローバルのスキルへ埋め込まない。
+作業対象ディレクトリの `AGENTS.md`、`WORKFLOW.md`、`IMPLEMENTATION-RULES.md` §1が示すプロジェクト固有の規約文書・決定記録、既存ブランチの慣習から特定する。文書の名称や形式はプロジェクトの実態に従い、ブランチ命名等が読み取れなければ聞く。サブシステム固有の値をグローバルのスキルへ埋め込まない。
 
 GitLab / GitHub / GitHub Enterpriseの違いは、作成・照会に使うCLI/API/MCP/スキルや権限設定で吸収する。hooksは必要としない。人のレビューはセッション出力とAIへのインタビューで進めてもよいが、マージ判断に使った要点はMR/PRに保存する。

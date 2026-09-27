@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "norms_dir_default": "~/.agent-norms",
+  "entry": {
+    "sources": [
+      "shared/norms/00-priority-rules.md",
+      "shared/entry.md"
+    ],
+    "heading": "<!-- このファイルは ai-dev-harness のインストーラが生成した。直接編集せず、配布元の shared/norms/00-priority-rules.md と shared/entry.md を直してから入れ直す。 -->\n\n> 規範の置き場は `~/.agent-norms/`。以下に出てくる規範のファイル名(`working-norms.md` 等)とリンクは、そこからの相対。"
+  },
+  "norms": {
+    "tree": "shared/norms",
+    "extra": {
+      "runtime/claude.md": "adapters/claude/runtime.md",
+      "runtime/codex.md": "adapters/codex/runtime.md",
+      "runtime/kiro.md": "adapters/kiro/runtime.md",
+      "templates/TASKS.md.template": "shared/project/docs-dev/TASKS.md.template"
+    }
+  },
+  "project_templates": {
+    "AGENTS.md": "shared/project/AGENTS.md.template",
+    "docs/dev/TASKS.md": "shared/project/docs-dev/TASKS.md.template",
+    "docs/dev/WORKFLOW.md": "shared/project/docs-dev/WORKFLOW.md.template",
+    "docs/dev/IMPLEMENTATION-RULES.md": "shared/project/docs-dev/IMPLEMENTATION-RULES.md.template"
+  },
+  "roles": {
+    "implementer": {
+      "sources": [
+        "shared/roles/implementer.md"
+      ],
+      "description": "実装担当(standard)。タスク台帳のタスクIDを1件渡すと、仕様を読み、実装し、テストを通して結果を報告する。実装 tier が standard のタスクの委譲先。",
+      "claude": {
+        "model": "claude-sonnet-5",
+        "effort": "high"
+      },
+      "codex": {
+        "model": "gpt-5.6-luna",
+        "effort": "max"
+      },
+      "kiro": {
+        "model": "claude-sonnet-5",
+        "tools": [
+          "read",
+          "write",
+          "shell"
+        ]
+      }
+    },
+    "implementer-advanced": {
+      "sources": [
+        "shared/roles/implementer-advanced.md",
+        "shared/roles/implementer.md"
+      ],
+      "description": "実装担当(advanced)。実装 tier が advanced のタスク(契約・永続化形式・複雑ロジック・網羅性が問われる検査)と、重大指摘による差し戻し後の再実装に使う。",
+      "claude": {
+        "model": "claude-opus-5-5",
+        "effort": "medium"
+      },
+      "codex": {
+        "model": "gpt-5.6-luna",
+        "effort": "max"
+      },
+      "kiro": {
+        "model": "claude-opus-5",
+        "tools": [
+          "read",
+          "write",
+          "shell"
+        ]
+      }
+    },
+    "reviewer": {
+      "sources": [
+        "shared/roles/reviewer.md"
+      ],
+      "description": "独立レビュー担当。実装の文脈を持たずに、タスクの仕様適合と機能間の論理矛盾をレビューし、人のレビューへ出せる状態かを判定する。マージの承認はしない。",
+      "claude": {
+        "model": "claude-opus-5-5",
+        "effort": "medium"
+      },
+      "codex": {
+        "model": "gpt-5.6-sol",
+        "effort": "high"
+      },
+      "kiro": {
+        "model": "claude-opus-5",
+        "tools": [
+          "read",
+          "shell"
+        ]
+      }
+    },
+    "orchestrator": {
+      "sources": [
+        "adapters/kiro/agents/orchestrator.md"
+      ],
+      "description": "オーケストレーター。タスク台帳から1回に1タスクを選び、実装の委譲・検証・独立レビュー・MR/PR 提出まで進める。セッションをこのエージェントで始める。",
+      "kiro": {
+        "model": "claude-opus-5",
+        "tools": [
+          "*"
+        ]
+      }
+    }
+  },
+  "tools": {
+    "claude": {
+      "entry_import": "~/.claude/CLAUDE.md",
+      "skills_home": "~/.claude/skills",
+      "skills_project": ".claude/skills",
+      "agents_home": "~/.claude/agents",
+      "agents_project": ".claude/agents",
+      "agent_format": "claude-md",
+      "project_extra": {}
+    },
+    "codex": {
+      "entry_copy": "~/.codex/AGENTS.md",
+      "skills_home": "~/.agents/skills",
+      "skills_project": ".agents/skills",
+      "agents_home": null,
+      "agents_project": ".codex/agents",
+      "agent_format": "codex-toml",
+      "project_extra": {}
+    },
+    "kiro": {
+      "entry_copy": "~/.kiro/steering/AGENTS.md",
+      "skills_home": "~/.kiro/skills",
+      "skills_project": ".kiro/skills",
+      "agents_home": "~/.kiro/agents",
+      "agents_project": ".kiro/agents",
+      "agent_format": "kiro-md",
+      "project_extra": {
+        ".kiro/steering/harness-tasks.md": "adapters/kiro/steering/harness-tasks.md"
+      }
+    }
+  }
+}
