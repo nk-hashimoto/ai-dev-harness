@@ -1,10 +1,12 @@
-# 承認プロンプトを減らす
+# 承認プロンプトを減らす(Claude Code)
+
+> Claude Code の権限設定を前提にしている。Codex と Kiro の承認・許可の設定は、各ツールの公式ドキュメントに従う(Kiro は role 定義の `permissions` と `trustedAgents`。`adapters/kiro/runtime.md`「role の起動と再開」)。
 
 自動承認(auto mode)や許可のバイパスが使えない環境では、実装ループの1周ごとに**コマンドの数だけ承認**が要る。ここを放置すると、無人で回すどころか有人でも張り付きになる。
 
 ## 1. まず allowlist を試す
 
-`kit/settings/settings.json.template` を、プロジェクトの `.claude/settings.json` にコピーして当てる。読み取り専用のコマンド(`git status` / `git diff` / `ls` / `grep` など)と、主要な言語エコシステムの検証コマンドを事前許可している。
+[`adapters/claude/settings.json.template`](../../adapters/claude/settings.json.template) を、プロジェクトの `.claude/settings.json` にコピーして当てる。読み取り専用のコマンド(`git status` / `git diff` / `ls` / `grep` など)と、主要な言語エコシステムの検証コマンドを事前許可している。
 
 **使わないエコシステムの行は削る。** 許可リストは短いほど、何を許したかを人が把握できる。
 
@@ -34,7 +36,7 @@ make verify        # 中身: lint && 型チェック && テスト
 
 したがって **1タスク = 1委譲**に寄せる。タスクを細かく割って何度も委譲するより、1タスク分をまとめて渡し、承認は「実装1回分 + 検証1回分」に集約する。
 
-これは委譲の判定基準そのものとも整合する(→ `norms/working-norms.md`「委譲・スコープ・分量」)。数手のツール呼び出しで終わる仕事はもともと委譲しない。
+これは委譲の判定基準そのものとも整合する(→ `shared/norms/working-norms.md`「委譲・スコープ・分量」)。数手のツール呼び出しで終わる仕事はもともと委譲しない。
 
 ## 4. 承認を求められた側の作法
 
