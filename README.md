@@ -36,7 +36,7 @@ Claude Code・Codex では、`TASKS.md`(タスク台帳)と決定記録を**こ�
 shared/         ツール共通の原本
   norms/          作業規範(最重要ルール・運用ルール・設計原則・引き継ぎ・指示の書き方)
   entry.md        常時読み込みの入口のうち、作業ごとに読む節の案内(最重要ルールと合わせて AGENTS.md になる)
-  skills/         next-task(実装ループ)+ 定型手順14件
+  skills/         next-task(実装ループ)+ 定型手順
   roles/          implementer / implementer-advanced / reviewer の手順(モデル指定なし)
   project/        プロジェクトの AGENTS.md と docs/dev/(TASKS / WORKFLOW / IMPLEMENTATION-RULES)の雛形
 adapters/       ツールごとの差分
