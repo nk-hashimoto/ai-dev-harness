@@ -126,7 +126,7 @@ orchestrator のモデルはセッションを起動する側で選ぶ(推奨は
 
 ## 同梱スキル
 
-**実装ループ**: `next-task`
+**実装ループ**: `next-task` / `parallel-tasks`(`WORKFLOW.md` §3 がマージまで行うと定めている導入先だけ。複数タスクを worktree で並列に進める)
 
 **実装ループの中核**: `bug-hunt` / `test-first-fix` / `impact-scan` / `contract-change` / `self-review` / `release-check` / `spec-check`
 

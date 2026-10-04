@@ -52,6 +52,16 @@ developer_instructions = "<role の手順(shared/roles/ から生成される)>"
 - 連続実行: 1回の実行で1タスクを進め、次のタスクは新しい実行で始める(スキルの手順0から)。1セッションで回し続けるとコンテキストが伸び、序盤の制約・決定が要約で薄れる
 - タスク管理ツール: Codex の計画(plan)機能か、作業メモのファイル
 
+## 並列運転(`parallel-tasks`)
+
+スキル `parallel-tasks` が「runtime adapter が定める」と書いている事柄。
+
+- orchestrator は `next-task` と同じ
+- **起動**: `spawn_agent`、**完了待ち**: `wait_agent`、**続行**: `followup_task`。道具名は「role の起動と再開」と同じく要確認
+- **作業場所の指定**: プロンプトに worktree の絶対パスを書く。サブエージェントがリポジトリの外の worktree へ書き込めるかは未確認で、並列運転の前に1本で確かめる
+- **使用量の計測**: この adapter は定めていない。スキルの停止条件に従う
+- **クラウド**: 隔離された checkout が1つの環境で worktree を作る運用は未確認。確認するまで使わない
+
 ## hook
 
 このハーネスは hook を前提にしない。使う場合は Codex が公式に扱うイベントと schema だけを使う。
