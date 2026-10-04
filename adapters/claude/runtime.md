@@ -60,6 +60,18 @@ effort: low|medium|high|xhigh|max
 - 連続実行: `/loop /next-task`。1回ごとに次の選定をスキルの手順0からやり直す
 - タスク管理ツール: 組み込みの ToDo(タスク)ツール
 
+## 並列運転(`parallel-tasks`)
+
+スキル `parallel-tasks` が「runtime adapter が定める」と書いている事柄。
+
+- orchestrator は `next-task` と同じ
+- **起動**: Agent ツールの `run_in_background: true`。完了はバックグラウンドの結果通知で受け取る。**続行**: `SendMessage`(キャッシュの寿命の条件は「role の起動と再開」と同じ)
+- **作業場所の指定**: Agent ツールに作業ディレクトリの引数は無い。プロンプトに worktree の絶対パスを書く
+- **権限**: `settings.json.template` は worktree の作成・移動・削除を許可していない(`git worktree list` のみ)。並列運転する導入先で `git worktree add` / `move` / `remove` を許可する
+  - サブエージェントがリポジトリの外の worktree へ書き込めるかは未確認。並列運転の前に、1本で確かめる
+- **使用量の計測**: この adapter は定めていない。スキルの停止条件に従う
+- **クラウド**: 隔離された checkout が1つの環境で worktree を作る運用は未確認。確認するまで使わない
+
 ## 台帳
 
 `docs/dev/TASKS.md`(書式は `TASKS.md.template`)。読み替えは不要。
