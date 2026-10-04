@@ -67,7 +67,7 @@ effort: low|medium|high|xhigh|max
 - orchestrator は `next-task` と同じ
 - **起動**: Agent ツールの `run_in_background: true`。完了はバックグラウンドの結果通知で受け取る。**続行**: `SendMessage`(キャッシュの寿命の条件は「role の起動と再開」と同じ)
 - **作業場所の指定**: Agent ツールに作業ディレクトリの引数は無い。プロンプトに worktree の絶対パスを書く
-- **権限**: `settings.json.template` は worktree の作成・移動・削除を許可していない(`git worktree list` のみ)。並列運転する導入先で `git worktree add` / `move` / `remove` を許可する
+- **権限**: `settings.json.template` は worktree の作成・移動・削除(`git worktree add` / `move` / `remove`)を許可している。`--force` 付きの削除は未コミットの変更を捨てるので deny に入れてある
   - サブエージェントがリポジトリの外の worktree へ書き込めるかは未確認。並列運転の前に、1本で確かめる
 - **使用量の計測**: この adapter は定めていない。スキルの停止条件に従う
 - **クラウド**: 隔離された checkout が1つの環境で worktree を作る運用は未確認。確認するまで使わない

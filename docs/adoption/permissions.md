@@ -6,7 +6,8 @@
 
 ## 1. まず allowlist を試す
 
-[`adapters/claude/settings.json.template`](../../adapters/claude/settings.json.template) を、プロジェクトの `.claude/settings.json` にコピーして当てる。読み取り専用のコマンド(`git status` / `git diff` / `ls` / `grep` など)と、主要な言語エコシステムの検証コマンドを事前許可している。
+[`adapters/claude/settings.json.template`](../../adapters/claude/settings.json.template) を、プロジェクトの `.claude/settings.json` にコピーして当てる。  
+読み取り専用のコマンド(`git status` / `git diff` / `ls` / `grep` など)、主要な言語エコシステムの検証コマンド、スキル `parallel-tasks` が使う worktree の作成・移動・削除を事前許可している。
 
 **使わないエコシステムの行は削る。** 許可リストは短いほど、何を許したかを人が把握できる。
 
